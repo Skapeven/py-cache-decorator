@@ -3,25 +3,14 @@ from typing import Callable
 
 def cache(func: Callable) -> Callable:
     vault = {}
-    def wrapper(*args, **kwargs):
+
+    def wrapper(*args, **kwargs) -> any:
         if (args) in vault:
             print("Getting from cache")
+            return vault[args]
         else:
-            print("Calcultating new result")
-            vault[args] = func(*args)
+            print("Calculating new result")
+            result = func(*args)
+            vault[args] = result
+            return result
     return wrapper
-
-@cache
-def subtraction(a, b):
-    return a - b
-
-@cache
-def addition(a, b):
-    return a + b
-
-@cache
-
-subtraction(1, 1)
-addition(1, 1)
-subtraction(1, 1)
-addition(1, 1)
