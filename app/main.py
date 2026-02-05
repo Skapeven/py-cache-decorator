@@ -2,7 +2,15 @@ from typing import Callable
 
 
 def cache(func: Callable) -> Callable:
-    pass
+    vault = {}
+    def wrapper(*args, **kwargs):
+        if (args) in vault:
+            print("Getting from cache")
+        else:
+            print("Calcultating new result")
+            vault[args] = func(*args)
+    
+    return wrapper
 
 @cache
 def long_time_func(a: int, b: int, c: int) -> int:
@@ -11,17 +19,3 @@ def long_time_func(a: int, b: int, c: int) -> int:
 @cache
 def long_time_func_2(n_tuple: tuple, power: int) -> int:
     return [number ** power for number in n_tuple]
-
-long_time_func(1, 2, 3)
-long_time_func(2, 2, 3)
-long_time_func_2((5, 6, 7), 5)
-long_time_func(1, 2, 3)
-long_time_func_2((5, 6, 7), 10)
-long_time_func_2((5, 6, 7), 10)
-
-# Calculating new result 
-# Calculating new result 
-# Calculating new result 
-# Getting from cache 
-# Calculating new result 
-# Getting from cache
