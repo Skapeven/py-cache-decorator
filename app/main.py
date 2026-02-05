@@ -4,7 +4,7 @@ from typing import Callable
 def cache(func: Callable) -> Callable:
     vault = {}
 
-    def wrapper(*args, **kwargs) -> any:
+    def wrapper(*args) -> any:
         if (args) in vault:
             print("Getting from cache")
             return vault[args]
