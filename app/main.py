@@ -9,13 +9,19 @@ def cache(func: Callable) -> Callable:
         else:
             print("Calcultating new result")
             vault[args] = func(*args)
-    
     return wrapper
 
 @cache
-def long_time_func(a: int, b: int, c: int) -> int:
-    return (a ** b ** c) % (a * c)
+def subtraction(a, b):
+    return a - b
 
 @cache
-def long_time_func_2(n_tuple: tuple, power: int) -> int:
-    return [number ** power for number in n_tuple]
+def addition(a, b):
+    return a + b
+
+@cache
+
+subtraction(1, 1)
+addition(1, 1)
+subtraction(1, 1)
+addition(1, 1)
